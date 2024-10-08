@@ -1,0 +1,23 @@
+{% extends "components/base-session.html" %}
+ {% block controls %}
+<form method="post">
+  {% csrf_token %}
+  <div>
+    <label class="mb-2.5 block font-extrabold" for="id_username">Email</label>
+    {{ form.username }}
+  </div>
+  <div class="mt-4">
+    <label class="mb-2.5 block font-extrabold" for="id_password"
+      >Password</label
+    >
+    {{ form.password }}
+  </div>
+  {% block button_session %}
+  <div class="my-10" type="submit">
+    <button class="w-full rounded-full bg-orange-600 p-5 hover:bg-orange-800 hover:bg-red-800 ">
+      {{grabar}}
+    </button>
+  </div>
+  {% endblock%}
+</form>
+{% endblock %}

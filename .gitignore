@@ -1,0 +1,10 @@
+# created by virtualenv automatically
+venv
+
+db.sqlite3
+package-lock.json
+node_modules
+
+.env
+t.txt
+Modulo-Seguridad-Django
