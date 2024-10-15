@@ -1,0 +1,17 @@
+{% extends "components/base.html" %}
+{% load static %}
+{% block content %}
+<section>
+
+<form method="POST">
+    {% csrf_token %}
+    {% block controls %}{% endblock controls %}
+    {% block buttom %}
+    <button type="submit">
+        {{grabar}}
+    </button>
+    <a href="{{ back_url }}">Cancelar</a>
+    {% endblock buttom %}
+</form>
+</section>
+{% endblock content %}

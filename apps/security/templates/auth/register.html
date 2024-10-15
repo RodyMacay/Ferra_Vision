@@ -1,24 +1,65 @@
 {% extends "components/base-session.html" %}
- {% block controls %}
-<form method="post">
-  {% csrf_token %}
-  {% comment %} <div>
-    <label class="mb-2.5 block font-extrabold" for="id_username">Email</label>
-    {{ form.username }}
-  </div>
-  <div class="mt-4">
-    <label class="mb-2.5 block font-extrabold" for="id_password"
-      >Password</label
-    >
-    {{ form.password }}
-  </div> {% endcomment %}
-  {{form}}
-  {% block button_session %}
-  <div class="my-10" type="submit">
-    <button class="w-full rounded-full bg-orange-600 p-5 hover:bg-orange-800 hover:bg-red-800 ">
-      {{grabar}}
-    </button>
-  </div>
-  {% endblock%}
+{% load static %}
+{% block image_src %}
+    {% static 'img.webp' %}
+{% endblock %}
+{% include 'includes/error_messages.html' %} 
+{% block form %}
+<form method="post" class="space-y-6">
+    {% csrf_token %}
+    <div>
+        <label for="id_username" class="block text-sm font-medium text-gray-400">Usuario</label>
+        <div class="mt-1">
+            {{ form.username }}
+            {% if form.username.errors %}
+                <div class="text-red-500 text-sm">
+                    {{ form.username.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <label for="id_email" class="block text-sm font-medium text-gray-400">Email</label>
+        <div class="mt-1">
+            {{ form.email }}
+            {% if form.email.errors %}
+                <div class="text-red-500 text-sm">
+                    {{ form.email.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <label for="id_password1" class="block text-sm font-medium text-gray-400">Contraseña</label>
+        <div class="mt-1">
+            {{ form.password1 }}
+            {% if form.password1.errors %}
+                <div class="text-red-500 text-sm">
+                    {{ form.password1.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <label for="id_password2" class="block text-sm font-medium text-gray-400">Confirmar Contraseña</label>
+        <div class="mt-1">
+            {{ form.password2 }}
+            {% if form.password2.errors %}
+                <div class="text-red-500 text-sm">
+                    {{ form.password2.errors }}
+                </div>
+            {% endif %}
+        </div>
+    </div>
+    <div>
+        <button type="submit" class="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-ferra-orange hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-ferra-orange">
+            Registrarse
+        </button>
+    </div>
+    <div class="text-sm text-center">
+        <a href="{% url 'security:login' %}" class="font-medium text-ferra-orange hover:text-opacity-90">
+            ¿Ya tienes una cuenta? Inicia sesión
+        </a>
+    </div>
 </form>
 {% endblock %}

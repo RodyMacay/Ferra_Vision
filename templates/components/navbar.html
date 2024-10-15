@@ -1,0 +1,37 @@
+{% load static %}
+<nav class="bg-ferra-blue">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex items-center justify-between h-16">
+          <div class="flex items-center">
+              <a href="{% url 'core:home' %}" class="flex-shrink-0">
+                  <img class="h-8 w-auto" src="{% static 'logo2.png' %}" alt="FerraVision">
+              </a>
+              <div class="hidden md:block">
+                  <div class="ml-10 flex items-baseline space-x-4">
+                      <a href="{% url 'core:home' %}" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Inicio</a>
+                      <a href="#" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Servicios</a>
+                      <a href="#" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Acerca de</a>
+                      <a href="#" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Contacto</a>
+                  </div>
+              </div>
+          </div>
+          
+          <div class="hidden md:block">
+            <div class="ml-4 flex items-center md:ml-6">
+              {% if user.is_authenticated %}
+                <a href="{% url 'security:logout' %}" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Logout</a>
+                <div class="relative">
+                  <a href="" class="flex items-center text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">
+                      <img class="h-8 w-8 rounded-full object-cover mr-2" src="{% if user.profile.avatar %}{{ user.profile.avatar.url }}{% else %}{% static 'images/default-avatar.png' %}{% endif %}" alt="{{ user.username }}">
+                      <span>{{ user.username }}</span>
+                  </a>
+              </div>
+              {% else %}
+                <a href="{% url 'security:login' %}" class="text-white hover:bg-ferra-orange hover:text-ferra-blue px-3 py-2 rounded-md text-sm font-medium">Iniciar Sesión</a>
+                <a href="{% url 'security:signup' %}" class="bg-ferra-orange text-ferra-blue hover:bg-opacity-90 px-3 py-2 rounded-md text-sm font-medium ml-2">Registrarse</a>
+              {% endif %}
+            </div>
+          </div>
+      </div>
+  </div>
+</nav>

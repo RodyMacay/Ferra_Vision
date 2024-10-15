@@ -5,8 +5,8 @@ from ..security.models import User,UserGroup, UserPermission
 
 @admin.register(User)
 class CustomerGroupAdmin(admin.ModelAdmin):
-    list_display = ['username', 'email', 'cedula', 'phone']
-    search_fields = ['username', 'email', 'cedula', 'phone']
+    list_display = ['username', 'email']
+    search_fields = ['username', 'email']
     list_filter = ['groups', 'user_permissions']
 
 @admin.register(UserGroup)

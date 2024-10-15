@@ -1,0 +1,150 @@
+
+<div class="flex flex-col h-screen text-white">
+  <header class="bg-gray-900 py-4 px-6 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <a class="text-2xl font-bold flex items-center gap-2" href="#">
+        <img
+          src="/placeholder.svg"
+          alt="MusicStream Logo"
+          width="40"
+          height="40"
+          class="rounded-md"
+          style="aspect-ratio: 40 / 40; object-fit: cover;"
+        />
+        MusicStream
+      </a>
+      <nav class="flex items-center gap-4">
+        <a class="hover:text-gray-400" href="#">
+          Home
+        </a>
+        <a class="hover:text-gray-400 font-bold" href="#">
+          Mis Favoritos
+        </a>
+        <a class="hover:text-gray-400" href="#">
+          History
+        </a>
+      </nav>
+    </div>
+    <div class="flex items-center gap-4">
+      <div class="relative">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"
+        >
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.3-4.3"></path>
+        </svg>
+        <input
+          class="flex h-10 w-full border border-input px-3 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 bg-gray-800 rounded-md pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-[#1db954] text-white"
+          placeholder="Search for artists, albums, or songs"
+          type="text"
+        />
+      </div>
+    </div>
+  </header>
+  <main class="flex-1 overflow-y-auto">
+    <section class="py-12 px-6">
+      <div class="max-w-4xl mx-auto">
+        <div class="flex flex-col items-center justify-center mb-8">
+          <span class="relative flex shrink-0 overflow-hidden rounded-full w-24 h-24 mb-4">
+            <span class="flex h-full w-full items-center justify-center rounded-full bg-muted">JP</span>
+          </span>
+          <h1 class="text-4xl font-bold mb-2">Jared Palmer</h1>
+          <p class="text-gray-400">25 años</p>
+        </div>
+        <div class="grid grid-cols-1 gap-6 text-white">
+          <div class="bg-gray-900 rounded-lg p-6">
+            <h2 class="text-2xl font-bold mb-4">Últimas 3 canciones escuchadas</h2>
+            <div class="grid grid-cols-1 gap-4">
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">Song Title 1</h3>
+                  <p class="text-gray-400">Emoción: Alegre</p>
+                </div>
+                <div class="text-gray-400">3:45</div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">Song Title 2</h3>
+                  <p class="text-gray-400">Emoción: Triste</p>
+                </div>
+                <div class="text-gray-400">4:12</div>
+              </div>
+              <div class="flex items-center justify-between">
+                <div>
+                  <h3 class="text-lg font-bold">Song Title 3</h3>
+                  <p class="text-gray-400">Emoción: Energica</p>
+                </div>
+                <div class="text-gray-400">3:58</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+  <div class="bg-gray-900 py-4 px-6 flex items-center justify-between">
+    <div class="flex items-center gap-4">
+      <img
+        src="/placeholder.svg"
+        alt="Album Cover"
+        width="50"
+        height="50"
+        class="rounded-md"
+        style="aspect-ratio: 50 / 50; object-fit: cover;"
+      />
+      <div class="text-white">
+        <h3 class="text-lg font-bold">Song Title</h3>
+        <p class="text-gray-400">Artist Name</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-4">
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent h-10 w-10 text-white hover:text-[#1db954]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6 h-6"
+        >
+          <path d="M2 18h1.4c1.3 0 2.5-.6 3.3-1.7l6.1-8.6c.7-1.1 2-1.7 3.3-1.7H22"></path>
+          <path d="m18 2 4 4-4 4"></path>
+          <path d="M2 6h1.9c1.5 0 2.9.9 3.6 2.2"></path>
+          <path d="M22 18h-5.9c-1.3 0-2.6-.7-3.3-1.8l-.5-.8"></path>
+          <path d="m18 14 4 4-4 4"></path>
+        </svg>
+      </button>
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent h-10 w-10 text-white hover:text-[#1db954]">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          class="w-6 h-6"
+        >
+          <polygon points="11 19 2 12 11 5 11 19"></polygon>
+          <polygon points="22 19 13 12 22 5 22 19"></polygon>
+        </svg>
+      </button>
+      <button class="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 hover:bg-accent h-10 w-10 text-white hover:text-[#1db954]"></button>
+    </div>
+  </div>
+</div>

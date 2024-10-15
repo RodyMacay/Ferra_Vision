@@ -1,0 +1,7 @@
+{% if request.session.error_messages %}
+    <div class="text-red-500">
+        {% for error in request.session.error_messages %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+{% endif %}

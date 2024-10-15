@@ -1,0 +1,23 @@
+{% extends 'components/base.html' %} {% load static %} {% block content %}
+<div class="flex flex-col h-screen ">
+  <div class="flex-1 overflow-y-auto">
+    <section class="py-12 px-6">
+      <div class="max-w-4xl mx-auto">
+
+        {% block title %} {% endblock title %}
+        {% block cabezera %} {% endblock cabezera %}
+        <div class="grid grid-cols-4 gap-4">
+            {% block card %} {% endblock card %}
+        </div>
+
+        <div class="grid grid-cols-5 gap-6 ">
+          {% block columns %}
+          {% endblock columns %}
+          {% block row %}
+          {% endblock row %}
+        </div>
+      </div>
+    </section>
+  </div>
+</div>
+{% endblock content %}

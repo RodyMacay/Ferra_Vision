@@ -105,16 +105,23 @@ class CustomAuthenticationForm(AuthenticationForm):
 #         return user
 
 class CustomUserCreationForm(UserCreationForm):
+   
     password1 = forms.CharField(
         label="Contraseña",
         strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow', 'placeholder': 'Contraseña'}),
+        widget=forms.PasswordInput(attrs={
+            'class': 'inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow',
+            'placeholder': 'Contraseña'
+        }),
         help_text=None
     )
     password2 = forms.CharField(
         label="Confirmar contraseña",
         strip=False,
-        widget=forms.PasswordInput(attrs={'class': 'inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow', 'placeholder': 'Confirmar contraseña'}),
+        widget=forms.PasswordInput(attrs={
+            'class': 'inline-block w-full rounded-full bg-white p-2.5 leading-none text-black placeholder-indigo-900 shadow',
+            'placeholder': 'Confirmar contraseña'
+        }),
         help_text=None
     )
     
@@ -124,22 +131,16 @@ class CustomUserCreationForm(UserCreationForm):
 
     class Meta(UserCreationForm.Meta):
         model = User
-        fields = ('username', 'email', 'cedula', 'phone')
+        fields = ( 'username', 'email')
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Personalizar otros campos
-        for field_name in ['username', 'email', 'cedula', 'phone']:
+        for field_name in ['username', 'email',]:
             self.fields[field_name].widget.attrs.update({
                 'class': 'inline-block w-full rounded-full bg-white p-2 shadow text-xs text-black placeholder-indigo-900 placeholder-opacity-30',
                 'placeholder': f'{self.fields[field_name].label}'
             })
-            
-        # self.fields['image'].widget.attrs.update({
-        #     'class': 'inline-block w-full p-2 shadow text-xs bg-white rounded-full',
-        #     'placeholder': 'Seleccione un archivo',
-        #     'accept': 'image/*',  # Limitar a archivos de imagen
-        # })
 
     def clean_password2(self):
         password1 = self.cleaned_data.get('password1')

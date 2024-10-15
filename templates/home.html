@@ -1,0 +1,123 @@
+{% extends 'components/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio - FerraVision{% endblock %}
+
+
+{% block content %}
+<div class="bg-ferra-blue">
+    <!-- Hero Section -->
+    <div class="relative bg-ferra-blue overflow-hidden">
+        <div class="max-w-7xl mx-auto">
+            <div class="relative z-10 pb-8 bg-ferra-blue sm:pb-16 md:pb-20 lg:pb-28 xl:pb-32 lg:w-full lg:max-w-2xl">
+                <main class="mt-10 mx-auto max-w-7xl px-4 sm:mt-12 sm:px-6 md:mt-16 lg:mt-20 lg:px-8 xl:mt-28">
+                    <div class="sm:text-center lg:text-left">
+                        <h1 class="text-4xl tracking-tight font-extrabold text-white sm:text-5xl md:text-6xl">
+                            <span class="block">Bienvenido a</span>
+                            <span class="block text-ferra-orange">FerraVision</span>
+                        </h1>
+                        <p class="mt-3 text-base text-gray-300 sm:mt-5 sm:text-lg sm:max-w-xl sm:mx-auto md:mt-5 md:text-xl lg:mx-0">
+                            Descubre el poder de la visión artificial en la industria ferretera. Optimiza tu inventario y mejora la experiencia de tus clientes con nuestra tecnología de vanguardia.
+                        </p>
+                        <div class="mt-5 sm:mt-8 sm:flex sm:justify-center lg:justify-start">
+                            <div class="rounded-md shadow">
+                                <a href="{% url 'recognition:image_upload' %}" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-ferra-blue bg-ferra-orange hover:bg-opacity-90 md:py-4 md:text-lg md:px-10">
+                                    Comenzar
+                                </a>
+                            </div>
+                            <div class="mt-3 sm:mt-0 sm:ml-3">
+                                <a href="#" class="w-full flex items-center justify-center px-8 py-3 border border-transparent text-base font-medium rounded-md text-white bg-ferra-blue hover:bg-opacity-90 md:py-4 md:text-lg md:px-10">
+                                    Saber más
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
+        <div class="lg:absolute lg:inset-y-0 lg:right-0 lg:w-1/2">
+            <img class="h-56 w-full object-contain sm:h-72 md:h-96 lg:w-full lg:h-full" src="{% static 'fondo.webp' %}" alt="FerraVision Logo">
+        </div>
+    </div>
+
+    <!-- Features Section -->
+    <div class="py-12 bg-ferra-blue">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="lg:text-center">
+                <h2 class="text-base text-ferra-orange  font-semibold tracking-wide uppercase">Características</h2>
+                <p class="mt-2 text-3xl leading-8 font-extrabold tracking-tight text-white sm:text-4xl">
+                    Una mejor manera de gestionar tu ferretería
+                </p>
+                <p class="mt-4 max-w-2xl text-xl text-gray-300 lg:mx-auto">
+                    FerraVision ofrece soluciones innovadoras para optimizar tu negocio y mejorar la experiencia de tus clientes.
+                </p>
+            </div>
+
+            <div class="mt-10">
+                <dl class="space-y-10 md:space-y-0 md:grid md:grid-cols-2 md:gap-x-8 md:gap-y-10">
+                    <div class="relative">
+                        <dt>
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-ferra-orange text-white">
+                                <!-- Icon -->
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+                                </svg>
+                            </div>
+                            <p class="ml-16 text-lg leading-6 font-medium text-white">Reconocimiento de Imágenes</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-gray-300">
+                            Identifica automáticamente herramientas y productos en imágenes capturadas en la tienda.
+                        </dd>
+                    </div>
+
+                    <div class="relative">
+                        <dt>
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-ferra-orange text-white">
+                                <!-- Icon -->
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 6l3 1m0 0l-3 9a5.002 5.002 0 006.001 0M6 7l3 9M6 7l6-2m6 2l3-1m-3 1l-3 9a5.002 5.002 0 006.001 0M18 7l3 9m-3-9l-6-2m0-2v2m0 16V5m0 16H9m3 0h3" />
+                                </svg>
+                            </div>
+                            <p class="ml-16 text-lg leading-6 font-medium text-white">Gestión de Inventario</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-gray-300">
+                            Optimiza tu inventario con seguimiento en tiempo real y alertas de reabastecimiento.
+                        </dd>
+                    </div>
+
+                    <div class="relative">
+                        <dt>
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-ferra-orange text-white">
+                                <!-- Icon -->
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+                                </svg>
+                            </div>
+                            <p class="ml-16 text-lg leading-6 font-medium text-white">Recomendaciones Inteligentes</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-gray-300">
+                            Sugiere herramientas y productos relacionados basados en el reconocimiento visual.
+                        </dd>
+                    </div>
+
+                    <div class="relative">
+                        <dt>
+                            <div class="absolute flex items-center justify-center h-12 w-12 rounded-md bg-ferra-orange text-white">
+                                <!-- Icon -->
+                                <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6V4m0 2a2 2 0 100 4m0-4a2 2 0 110 4m-6 8a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4m6 6v10m6-2a2 2 0 100-4m0 4a2 2 0 110-4m0 4v2m0-6V4" />
+                                </svg>
+                            </div>
+                            <p class="ml-16 text-lg leading-6 font-medium text-white">Análisis Avanzado</p>
+                        </dt>
+                        <dd class="mt-2 ml-16 text-base text-gray-300">
+                            Obtén insights valiosos sobre tendencias de ventas y comportamiento del cliente.
+                        </dd>
+                    </div>
+                </dl>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

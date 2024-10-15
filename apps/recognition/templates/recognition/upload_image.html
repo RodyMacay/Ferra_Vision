@@ -1,0 +1,58 @@
+{% extends 'components/base.html' %}
+{% load static %}
+
+{% block title %}Cargar Imagen - FerraVision{% endblock %}
+
+{% block content %}
+<div class="min-h-screen bg-ferra-blue flex items-center justify-center p-4">
+    <div class="w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden">
+        <div class="p-6">
+            <h2 class="text-2xl font-bold text-center text-ferra-blue mb-6">Cargar Imagen</h2>
+            <form action="{% url 'core:home' %}" method="post" enctype="multipart/form-data" class="space-y-4">
+                {% csrf_token %}
+                <div class="flex flex-col items-center justify-center w-full">
+                    <label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 border-ferra-blue border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 relative overflow-hidden">
+                        <div id="upload-icon" class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <svg class="w-10 h-10 mb-3 text-ferra-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path>
+                            </svg>
+                            <p class="mb-2 text-sm text-ferra-blue"><span class="font-semibold">Haz clic para cargar</span> o arrastra y suelta</p>
+                            <p class="text-xs text-ferra-blue">PNG, JPG (MAX. 5MB)</p>
+                        </div>
+                        <div id="image-preview-container" class="absolute inset-0 flex items-center justify-center hidden">
+                            <img id="image-preview" class="max-w-full max-h-full object-contain" alt="Vista previa de la imagen">
+                        </div>
+                        <input id="image-upload" name="image" type="file" class="hidden" accept="image/png, image/jpeg" />
+                    </label>
+                </div>
+                {% if form.errors %}
+                    <div class="text-red-500 text-sm">
+                        {{ form.image.errors }}
+                    </div>
+                {% endif %}
+                <div class="flex justify-center">
+                    <button type="submit" class="bg-ferra-orange text-white py-2 px-4 rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-ferra-orange focus:ring-opacity-50 transition duration-300">
+                        Analizar Imagen
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.getElementById('image-upload').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const img = document.getElementById('image-preview');
+                img.src = e.target.result;
+                document.getElementById('image-preview-container').classList.remove('hidden');
+                document.getElementById('upload-icon').classList.add('hidden');
+            }
+            reader.readAsDataURL(file);
+        }
+    });
+</script>
+{% endblock %}

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    {% load static %}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'ferra-blue': '#1C2A35',
+                        'ferra-orange': '#FF8C00',
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="{% static 'css/main.min.css' %}">
+    <title>{{ title }} - Ferra Visión</title>
+</head>
+<body class="bg-ferra-blue">
+    <div class="min-h-screen flex">
+        <!-- Left side with form -->
+        <div class="w-full md:w-1/2 flex flex-col justify-center items-center p-8">
+            <div class="w-full max-w-md">
+                <div class="text-center mb-8">
+                  <img src="/static/logo2.png" alt="FerraVision Logo" class="w-18 h-16 mx-auto">
+                    <p class="mt-2 text-smfont-bold text-white">{{ title }}</p>
+                </div>
+                {% block form %}{% endblock %}
+            </div>
+        </div>
+        <!-- Right side with image -->
+        <div class="hidden md:block md:w-1/2">
+            <img src="{% block image_src %}{% endblock %}" alt="Ferra Visión" class="w-full h-full object-cover">
+        </div>
+    </div>
+</body>
+</html>

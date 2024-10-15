@@ -18,17 +18,8 @@ class CustomUserManager(BaseUserManager):
         return self.create_user(email, password, **extra_fields)
 
 class User(AbstractUser):
-    cedula = models.CharField(verbose_name='cedula o dni', max_length=13, blank=True, null=True, unique=True)
-    image = models.ImageField(
-        verbose_name='Archive image',
-        upload_to='users',
-        max_length=1024,
-        blank=True,
-        null=True
-    )
     email = models.EmailField('email address',unique=True)
-    phone = models.CharField('Telefono',max_length=50,blank=True,null=True)
-    
+
     # Especificar related_name personalizado para evitar conflictos
     groups = models.ManyToManyField(Group, through='UserGroup', related_name='custom_user_groups')
     user_permissions = models.ManyToManyField(Permission, through='UserPermission', related_name='custom_user_permissions')
@@ -40,7 +31,7 @@ class User(AbstractUser):
     class Meta:
         verbose_name='user'
         verbose_name_plural='users'
-        unique_together = ('username', 'email', 'cedula')
+        unique_together = ('username', 'email')
         
     def __str__(self, *args, **kwargs):
         return '{}'.format(self.username)
