@@ -1,0 +1,183 @@
+{% extends "components/base.html" %}
+{% load custom_filters %}
+{% load static %}
+
+{% block content %}
+<div class="bg-[#1f2937] min-h-screen py-8 px-4 sm:px-6 lg:px-8">
+  <div class="max-w-5xl mx-auto space-y-6">
+    <!-- Card de Detalles del Proyecto -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="bg-[#f97316] text-white p-4">
+        <h2 class="text-2xl font-bold">Detalles del Proyecto</h2>
+      </div>
+      <div class="p-4">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 items-start">
+          <div class="flex justify-center lg:justify-start">
+            <div class="relative w-48 h-48">
+              <img src="{{ image.image.url }}" alt="Imagen del objeto" class="w-full h-full object-cover rounded-lg shadow-md">
+            </div>
+          </div>
+          <div class="space-y-3">
+            <h3 class="text-lg font-semibold text-[#f97316]">Descripción General</h3>
+            <p class="text-gray-700">{{ image.description }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Grid de Materiales y Pasos -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden h-full">
+        <div class="bg-[#f97316] text-white p-3">
+          <h3 class="text-lg font-bold flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+            </svg>
+            Materiales Necesarios
+          </h3>
+        </div>
+        <div class="p-4">
+          <ul class="list-disc list-inside text-gray-700 space-y-1">
+            {% for material in image.materials.splitlines %}
+              <li>{{ material }}</li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+
+      <div class="bg-white shadow-lg rounded-lg overflow-hidden h-full">
+        <div class="bg-[#f97316] text-white p-3">
+          <h3 class="text-lg font-bold flex items-center">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01" />
+            </svg>
+            Pasos de Construcción
+          </h3>
+        </div>
+        <div class="p-4">
+          <ul class="list-decimal list-inside text-gray-700 space-y-2">
+            {% for step, description in construction_steps.items %}
+              <li>
+                <span class="text-[#f97316] font-medium">{{ step }}:</span>
+                <p class="mt-1 ml-4">{{ description }}</p>
+              </li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- Información Adicional -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="bg-[#f97316] text-white p-3">
+        <h3 class="text-lg font-bold flex items-center">
+          <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+          Información Adicional
+        </h3>
+      </div>
+      <div class="p-4">
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#f97316]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-slate-950">Tiempo Estimado</p>
+                <p class="text-sm text-gray-700">{{ image.estimated_time }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#f97316]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-slate-950">Costo Aproximado</p>
+                <p class="text-sm text-gray-700">${{ image.cost }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="bg-gray-50 p-3 rounded-lg">
+            <div class="flex items-center space-x-2">
+              <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-[#f97316]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              </svg>
+              <div>
+                <p class="text-sm font-semibold text-slate-950">Dificultad</p>
+                <p class="text-sm text-gray-700">{{ image.difficulty }}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sección de Precios -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="p-4">
+        <div class="flex flex-col sm:flex-row items-start gap-4">
+          <button id="calculate-prices-btn" class="bg-[#f97316] hover:bg-[#ea580c] text-white font-bold py-2 px-4 rounded-lg transition duration-300 ease-in-out transform hover:scale-105">
+            Calcular Precios
+          </button>
+          <div id="prices-container" class="hidden w-full bg-gray-50 p-4 rounded-lg">
+            <h3 class="text-lg font-semibold mb-2 text-slate-950">Precios por Material</h3>
+            <ul id="prices-list" class="space-y-1 mb-3 text-sm text-gray-700"></ul>
+            <div class="border-t pt-2">
+              <p class="font-semibold text-slate-950">Total: <span id="total-price" class="text-[#f97316]"></span></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Fecha de Subida -->
+    <div class="bg-white shadow-lg rounded-lg overflow-hidden">
+      <div class="p-3 text-center text-sm text-gray-600">
+        Subido el {{ image.created_at|date:"d/m/Y H:i" }}
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+    document.getElementById('calculate-prices-btn').addEventListener('click', function() {
+        const imageId = "{{ image.id }}";
+        fetch(`/images/${imageId}/calculate-prices/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': '{{ csrf_token }}'
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            const pricesContainer = document.getElementById('prices-container');
+            const pricesList = document.getElementById('prices-list');
+            const totalPrice = document.getElementById('total-price');
+
+            pricesList.innerHTML = '';
+            totalPrice.textContent = '';
+
+            for (const [material, price] of Object.entries(data.precios_individuales)) {
+                const li = document.createElement('li');
+                li.className = 'flex justify-between items-center';
+                li.innerHTML = `
+                    <span class="font-medium">${material}:</span>
+                    <span class="text-[#f97316]">$${price}</span>
+                `;
+                pricesList.appendChild(li);
+            }
+
+            totalPrice.textContent = `$${data.precio_final}`;
+            pricesContainer.classList.remove('hidden');
+        })
+        .catch(error => console.error('Error:', error));
+    });
+</script>
+{% endblock %}

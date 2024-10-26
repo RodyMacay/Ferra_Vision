@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.core',
     'apps.security',
     'apps.recognition',
+    'apps.images',
 
 ]
 
@@ -153,3 +154,26 @@ AUTH_USER_MODEL = "security.User"
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = '/'
+
+
+# SERVICIO DE AWS
+AWS_ACCESS_KEY_ID = 'AKIA5BFDIVTJWBQRGOAG'
+AWS_SECRET_ACCESS_KEY = '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'
+AWS_STORAGE_BUCKET_NAME = 'files-project-contruccion'
+
+AWS_S3_REGION_NAME = 'us-east-1'
+STORAGES ={
+    "default": {
+        "BACKEND": "storages.backends.s3.S3Storage",
+    },
+    "staticfiles": {
+        "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
+    },
+}
+
+
+#AZURE SERVICES
+AZURE_COMPUTER_VISION_KEY = '2fcc40acf220403691d3fe35896696f9'
+AZURE_COMPUTER_VISION_ENDPOINT = 'https://reconocimiento-ia-grupo.cognitiveservices.azure.com/'
+AZURE_OPENAI_KEY = '79011326a98e40858443a6d6a4d7e742'
+AZURE_OPENAI_ENDPOINT = 'https://reconocimiento-ia.openai.azure.com/'
