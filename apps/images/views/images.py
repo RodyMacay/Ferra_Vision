@@ -11,7 +11,7 @@ from ..azure_services import process_image, calculate_prices
 class ImageUploadView(CreateView):
     model = ImageUpload
     form_class = ImageUploadForm
-    template_name = 'images/upload.html'
+    template_name = 'images/upload_image.html'
 
     def form_valid(self, form):
         # Guardar la instancia sin la descripción aún
