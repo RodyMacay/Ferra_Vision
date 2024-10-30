@@ -8,8 +8,9 @@
     <div class="w-full max-w-md bg-white rounded-lg shadow-xl overflow-hidden">
         <div class="p-6">
             <h2 class="text-2xl font-bold text-center text-ferra-blue mb-6">Cargar Imagen</h2>
-            <form action="{% url 'core:home' %}" method="post" enctype="multipart/form-data" class="space-y-4">
+            <form method="post" enctype="multipart/form-data" class="space-y-4">
                 {% csrf_token %}
+                {{ form.as_p }}
                 <div class="flex flex-col items-center justify-center w-full">
                     <label for="image-upload" class="flex flex-col items-center justify-center w-full h-64 border-2 border-ferra-blue border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 relative overflow-hidden">
                         <div id="upload-icon" class="flex flex-col items-center justify-center pt-5 pb-6">
