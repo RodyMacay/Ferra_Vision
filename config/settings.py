@@ -12,6 +12,11 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 
 from pathlib import Path
 import os
+from dotenv import load_dotenv
+
+# Cargar variables de entorno
+load_dotenv()
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -156,10 +161,10 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 
 
-# SERVICIO DE AWS
-AWS_ACCESS_KEY_ID = 'AKIA5BFDIVTJWBQRGOAG'
-AWS_SECRET_ACCESS_KEY = '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'
-AWS_STORAGE_BUCKET_NAME = 'files-project-contruccion'
+# AWS Service
+AWS_ACCESS_KEY_ID = os.getenv('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.getenv('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = os.getenv('AWS_STORAGE_BUCKET_NAME')
 
 AWS_S3_REGION_NAME = 'us-east-1'
 STORAGES ={
@@ -172,8 +177,8 @@ STORAGES ={
 }
 
 
-#AZURE SERVICES
-AZURE_COMPUTER_VISION_KEY = '2fcc40acf220403691d3fe35896696f9'
-AZURE_COMPUTER_VISION_ENDPOINT = 'https://reconocimiento-ia-grupo.cognitiveservices.azure.com/'
-AZURE_OPENAI_KEY = '79011326a98e40858443a6d6a4d7e742'
-AZURE_OPENAI_ENDPOINT = 'https://reconocimiento-ia.openai.azure.com/'
+# Azure Services
+AZURE_COMPUTER_VISION_KEY = os.getenv('AZURE_COMPUTER_VISION_KEY')
+AZURE_COMPUTER_VISION_ENDPOINT = os.getenv('AZURE_COMPUTER_VISION_ENDPOINT')
+AZURE_OPENAI_KEY = os.getenv('AZURE_OPENAI_KEY')
+AZURE_OPENAI_ENDPOINT = os.getenv('AZURE_OPENAI_ENDPOINT')
