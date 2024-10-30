@@ -4,11 +4,15 @@ import json
 from django.http import JsonResponse
 from django.views.generic import CreateView, DetailView, UpdateView
 from django.urls import reverse, reverse_lazy
+
+from apps.security.mixins.mixim import PermissionMixim
 from ..models import ImageUpload
 from ..forms import ImageUploadForm
 from ..azure_services import process_image, calculate_prices
+from django.contrib.auth.mixins import LoginRequiredMixin
 
-class ImageUploadView(CreateView):
+
+class ImageUploadView(PermissionMixim,CreateView):
     model = ImageUpload
     form_class = ImageUploadForm
     template_name = 'images/upload_image.html'
@@ -16,6 +20,7 @@ class ImageUploadView(CreateView):
     def form_valid(self, form):
         # Guardar la instancia sin la descripción aún
         self.object = form.save()
+        
         # Procesar la imagen con Azure y obtener la respuesta como diccionario
         response = process_image(self.object.image.url)
 
@@ -48,6 +53,7 @@ class ImageUploadView(CreateView):
     success_url = reverse_lazy('images:image_detail')
 
     def form_valid(self, form):
+        form.instance.user = self.request.user
         # Guardar la instancia sin la descripción aún
         self.object = form.save()
         # Procesar la imagen con Azure y obtener la respuesta como diccionario
@@ -83,7 +89,7 @@ class ImageUploadView(CreateView):
         self.object.save()
         return super().form_valid(form)
 
-class ImageDetailView(DetailView):
+class ImageDetailView(PermissionMixim, DetailView):
     model = ImageUpload
     template_name = 'images/image_detail.html'
     context_object_name = 'image'

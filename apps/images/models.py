@@ -1,6 +1,9 @@
 from django.db import models
 
+from apps.security.models import User
+
 class ImageUpload(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     image = models.ImageField(upload_to='uploads/')
     description = models.TextField(blank=True, null=True)
     materials = models.TextField(blank=True, null=True)
