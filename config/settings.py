@@ -42,7 +42,6 @@ INSTALLED_APPS = [
     'apps.security',
     'apps.recognition',
     'apps.images',
-
 ]
 
 MIDDLEWARE = [
