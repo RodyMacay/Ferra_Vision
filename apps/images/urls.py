@@ -1,4 +1,5 @@
 from django.urls import path
+from apps.images.views.favorities import FavoriteListView, ToggleFavoriteView
 from apps.images.views.history import ListViewsHistoryImage
 from apps.images.views.images import ImageDetailView, ImageUploadView, calculate_prices_view
 
@@ -17,3 +18,8 @@ urlpatterns +=[
     
 ];
 
+
+urlpatterns +=[
+    path('favorites/', FavoriteListView.as_view(), name='favorites_list'),
+    path('toggle_favorite/<int:image_id>/', ToggleFavoriteView.as_view(), name='toggle_favorite')
+];

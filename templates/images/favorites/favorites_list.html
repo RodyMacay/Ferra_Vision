@@ -1,0 +1,28 @@
+
+{% extends "components/base.html" %} 
+{% load static %} 
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Mis Favoritos - FerraVision</h1>
+
+{% if favorites %}
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {% for favorite in favorites %}
+            <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                <a href="{% url 'images:image_detail' favorite.image.id %}">
+                    <img src="{{ favorite.image.image.url }}" alt="{{ favorite.image.description }}" class="w-full h-48 object-cover">
+                </a>
+                <div class="p-4">
+                    <p class="text-gray-800 font-semibold">{{ favorite.image.description }}</p>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    {% include "components/no_content_message.html" with 
+        message="No tienes favoritos" 
+        sub_message="Explora y de favoritos" 
+        link_url="{% url 'images:upload_image' %}" 
+    %}
+  {% endif %}
+
+{% endblock %}

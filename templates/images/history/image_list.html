@@ -1,76 +1,61 @@
-{% extends "components/base.html" %} 
-{% load static %} 
-{% block title %}Historial{% endblock %} 
+{% extends "components/base.html" %}
+{% load static %}
+
+{% block title %}Historial - FerraVision{% endblock %}
+
 {% block content %}
 <div class="flex flex-col min-h-screen">
-  <div class="flex-grow p-4">
+  <div class="flex-grow p-6">
+    <h2 class="text-3xl font-bold mb-6">Mi Historial</h2>
+
     {% if images %}
-    <div
-      class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4"
-    >
-      {% for image in images %}
-      <div
-        class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105"
-      >
-        <div class="relative">
-          <img
-            src="{{ image.image.url }}"
-            alt="{{ image.description }}"
-            class="w-full h-48 object-cover"
-          />
-          <div
-            class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent"
-          >
-            <p class="text-gray-200 text-sm font-semibold">
-              {{ image.description }}
-            </p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        {% for image in images %}
+        <div class="bg-white rounded-lg shadow-md overflow-hidden transform transition-transform hover:scale-105">
+          <div class="relative">
+            <img src="{{ image.image.url }}" alt="{{ image.description }}" class="w-full h-48 object-cover">
+            <div class="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/50 to-transparent">
+              <p class="text-gray-200 text-sm font-semibold">{{ image.description }}</p>
+            </div>
+          </div>
+          <div class="p-4 flex justify-between items-center">
+            <!-- Botón de detalles -->
+            <a href="{% url 'images:image_detail' image.id %}" class="text-blue-600 hover:text-blue-700 transition-colors">
+              <button aria-label="Ver Detalles">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
+                </svg>
+              </button>
+            </a>
+            <!-- Botón de favoritos -->
+            <form method="post" action="{% url 'images:toggle_favorite' image.id %}">
+              {% csrf_token %}
+              {% if image.id in favorite_ids %}
+                <!-- Icono de Favorito Activado (Relleno Rojo) -->
+                <button type="submit" title="Eliminar de favoritos" class="focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-red-500 hover:text-red-700 transition-colors" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M5.64 5.64a8.43 8.43 0 0111.92 0c3.29 3.29 3.29 8.63 0 11.92l-5.96 5.96a1 1 0 01-1.42 0l-5.96-5.96c-3.29-3.29-3.29-8.63 0-11.92z"/>
+                  </svg>
+                </button>
+              {% else %}
+                <!-- Icono de Favorito Desactivado (Borde Gris) -->
+                <button type="submit" title="Añadir a favoritos" class="focus:outline-none">
+                  <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 text-gray-400 hover:text-red-500 transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5.64 5.64a8.43 8.43 0 0111.92 0c3.29 3.29 3.29 8.63 0 11.92l-5.96 5.96a1 1 0 01-1.42 0l-5.96-5.96c-3.29-3.29-3.29-8.63 0-11.92z"/>
+                  </svg>
+                </button>
+              {% endif %}
+            </form>
           </div>
         </div>
-        <div class="p-4 flex justify-between items-center">
-          <a
-            href="{% url 'images:image_detail' image.id %}"
-            class="text-blue-600 hover:text-blue-700 transition-colors"
-          >
-            <button>
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                class="h-6 w-6"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke="currentColor"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
-                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"
-                />
-              </svg>
-            </button>
-          </a>
-        </div>
+        {% endfor %}
       </div>
-      {% endfor %}
-    </div>
     {% else %}
-    <div class="flex justify-center items-center h-full min-h-[50vh]">
-      <div class="text-center">
-        <p
-          class="text-gray-500 text-lg animate-bounce transition-opacity duration-700 ease-in-out"
-        >
-          <span class="text-4xl">📦</span> No tienes historial
-        </p>
-        <p class="text-gray-400 mt-2 text-sm">
-          Explora y guarda imágenes para ver
-          <a
-            href="{% url 'images:upload_image' %}"
-            class="text-blue-500 hover:text-blue-700 transition-colors"
-          >
-            aquí </a
-          >.
-        </p>
-      </div>
-    </div>
+      {% include "components/no_content_message.html" with 
+          message="No tienes historial" 
+          sub_message="Explora y guarda imágenes para ver" 
+          link_url="{% url 'images:upload_image' %}" 
+      %}
     {% endif %}
   </div>
 </div>
