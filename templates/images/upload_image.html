@@ -8,6 +8,16 @@
     <div class="w-full max-w-md bg-white rounded-xl shadow-2xl overflow-hidden transform transition duration-300 hover:scale-105 hover:shadow-lg">
         <div class="p-8">
             <h2 class="text-3xl font-extrabold text-center text-ferra-blue mb-8">Cargar Imagen</h2>
+            
+            <!-- Sección para mostrar los mensajes de error -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="bg-red-500 text-white text-sm text-center p-2 rounded-md mb-4">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
             <form method="post" enctype="multipart/form-data" class="space-y-6">
                 {% csrf_token %}
                 
@@ -34,6 +44,7 @@
                         {{ form.image.errors }}
                     </div>
                 {% endif %}
+                
                 <div class="flex justify-center mt-6">
                     <button type="submit" class="bg-ferra-orange text-white py-2 px-6 rounded-full shadow-lg hover:bg-ferra-orange-dark focus:outline-none focus:ring-2 focus:ring-ferra-orange focus:ring-opacity-50 transition duration-300 ease-in-out transform hover:scale-105">
                         Analizar Imagen

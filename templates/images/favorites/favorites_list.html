@@ -1,8 +1,9 @@
 
 {% extends "components/base.html" %} 
 {% load static %} 
+{% block title %}Favoritos - FerraVision{% endblock %}
 {% block content %}
-<h1 class="text-2xl font-bold mb-4">Mis Favoritos - FerraVision</h1>
+<h1 class="text-2xl font-bold mb-4 mx-10">Mis Favoritos - FerraVision</h1>
 
 {% if favorites %}
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
@@ -18,11 +19,9 @@
         {% endfor %}
     </div>
     {% else %}
-    {% include "components/no_content_message.html" with 
-        message="No tienes favoritos" 
-        sub_message="Explora y de favoritos" 
-        link_url="{% url 'images:upload_image' %}" 
-    %}
+    {% url 'images:upload_image' as link_url %}
+    {% include "components/no_content_message.html" with message="No tienes favoritos" sub_message="Explora y de favoritos" link_url=link_url %}
+
   {% endif %}
 
 {% endblock %}

@@ -34,17 +34,3 @@ class ModelBase(models.Model):
 
 
 
-class Emotion(ModelBase):
-    name = models.CharField(max_length=255, blank=True, null=True)
-
-    def __str__(self):
-        return self.name
-
-
-class UserMood(ModelBase):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    emotion = models.ForeignKey(Emotion, on_delete=models.CASCADE)
-
-    def __str__(self):
-        return f"{self.user}-{self.emotion}"
-

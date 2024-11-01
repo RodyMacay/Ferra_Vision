@@ -15,12 +15,12 @@ class ImageUploadManager(models.Manager):
         
     def get_image_and_description_by_user(self, username):
         try:
-            user = User.objects.get(username=username);
+            user = User.objects.get(username=username)
             print(user)
             if user.is_authenticated:
-                values = self.filter(user=user).order_by('-created_at').values('image', 'description', 'id')
-                print(values)
-                return values
+                queryset = self.filter(user=user).order_by('-created_at').only('image', 'description', 'id')
+                print(queryset)
+                return queryset
         except User.DoesNotExist:
             return None
 

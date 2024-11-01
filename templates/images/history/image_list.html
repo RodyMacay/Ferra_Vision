@@ -51,11 +51,9 @@
         {% endfor %}
       </div>
     {% else %}
-      {% include "components/no_content_message.html" with 
-          message="No tienes historial" 
-          sub_message="Explora y guarda imágenes para ver" 
-          link_url="{% url 'images:upload_image' %}" 
-      %}
+    {% url 'images:upload_image' as link_url %}
+    {% include "components/no_content_message.html" with message="No tienes Historial para ver" sub_message="Explora y guarda imágenes para ver"  link_url=link_url %}
+
     {% endif %}
   </div>
 </div>

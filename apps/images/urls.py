@@ -11,15 +11,15 @@ urlpatterns +=[
     path('upload/', ImageUploadView.as_view(), name='upload_image'),
     path('<int:pk>/', ImageDetailView.as_view(), name='image_detail'),
     path('<int:pk>/calculate-prices/', calculate_prices_view, name='calculate_prices'),
-];
+]
 
 urlpatterns +=[
     path('history/', ListViewsHistoryImage.as_view(), name='history_upload_image'),
     
-];
+]
 
 
 urlpatterns +=[
     path('favorites/', FavoriteListView.as_view(), name='favorites_list'),
     path('toggle_favorite/<int:image_id>/', ToggleFavoriteView.as_view(), name='toggle_favorite')
-];
+]

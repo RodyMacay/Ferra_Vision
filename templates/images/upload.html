@@ -31,6 +31,12 @@
                         {{ form.image.errors }}
                     </div>
                 {% endif %}
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">{{ message }}</div>
+                    {% endfor %}
+                {% endif %}
+
                 <div class="flex justify-center">
                     <button type="submit" class="bg-ferra-orange text-white py-2 px-4 rounded-md hover:bg-opacity-90 focus:outline-none focus:ring-2 focus:ring-ferra-orange focus:ring-opacity-50 transition duration-300">
                         Analizar Imagen
