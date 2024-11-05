@@ -120,6 +120,59 @@
       {"Material": "Codo de 45°", "Unidad": "u", "Precio": 0.90},
       {"Material": "Adaptador de cobre", "Unidad": "u", "Precio": 3.00},
       {"Material": "Boca de riego", "Unidad": "u", "Precio": 15.00}
-    ]
+    ],
+    
+      "Construcciones": [
+    {
+        "Material": "casa"
+    },
+    {
+        "Material": "edificio"
+    },
+    {
+        "Material": "puente"
+    },
+    {
+        "Material": "carretera"
+    },
+    {
+        "Material": "escuela"
+    },
+    {
+        "Material": "hospital"
+    },
+    {
+        "Material": "torre"
+    },
+    {
+        "Material": "túnel"
+    },
+    {
+        "Material": "estadio"
+    },
+    {
+        "Material": "centro comercial"
+    },
+    {
+        "Material": "fábrica"
+    },
+    {
+        "Material": "almacén"
+    },
+    {
+        "Material": "aeropuerto"
+    },
+    {
+        "Material": "iglesia"
+    },
+    {
+        "Material": "parque"
+    },
+    {
+        "Material": "museo"
+    }
+]
+
+    
   }
   

@@ -1,3 +1,4 @@
+import os
 import re
 import json
 import requests
@@ -8,7 +9,8 @@ from django.conf import settings
 # Configuración del logger
 logging.basicConfig(level=logging.INFO)
 
-file_path = r'C:\Users\ASUS\Desktop\trabajos_Software\Ferra_Vision\apps\images\data\material_prices.json'
+file_path = os.path.join("apps", "images", "data", "material_prices.json")
+
 
 # Cargar datos de materiales desde un archivo JSON
 with open(file_path, 'r', encoding='utf-8') as file:
@@ -17,7 +19,13 @@ with open(file_path, 'r', encoding='utf-8') as file:
 def sanitize_response_content(content):
     """Sanitiza el contenido de la respuesta para extraer JSON válido."""
     json_match = re.search(r'\{.*\}', content, re.DOTALL)
-    return json_match.group(0) if json_match else "{}"
+    if not json_match:
+        return "{}"
+    sanitized = json_match.group(0)
+    # Eliminar comas finales antes de } o ]
+    sanitized = re.sub(r',\s*([}\]])', r'\1', sanitized)
+    return sanitized
+
 
 def extract_keywords_from_json(json_data):
     """Extrae palabras clave de materiales de construcción de los datos JSON."""
@@ -71,7 +79,8 @@ def create_prompt(description):
     """Crea el prompt para OpenAI basado en la descripción proporcionada."""
     return (
         f"Basándote en la descripción: '{description}', describe el objeto en la imagen y proporciona una guía paso a paso para construirlo. "
-        f"Devuelve la respuesta estrictamente en formato JSON, con las claves exactamente como sigue:\n\n"
+        f"Devuelve la respuesta estrictamente en formato JSON, asegurándote de que no haya comas adicionales al final de ningún objeto o arreglo. "
+        f"Las claves deben ser exactamente las siguientes:\n\n"
         f"{{\n"
         f"  \"Descripción General\": \"...\",\n"
         f"  \"Materiales Necesarios\": [\"...\", \"...\"],\n"
@@ -92,9 +101,7 @@ def process_image(image_url):
     print("url", image_url)
     basic_description = analyze_image(image_url)
 
-    # Verifica si la descripción contiene palabras clave relacionadas con construcción
     if isinstance(basic_description, dict) and "error" in basic_description:
-        # Si hubo un error en el análisis de la imagen, retorna el mensaje de error
         return basic_description
 
     if not is_construction_related(basic_description, construction_keywords):
@@ -103,7 +110,6 @@ def process_image(image_url):
             "error": "La imagen no contiene elementos relacionados con construcción. Por favor, cargue una imagen de un objeto de construcción."
         }
 
-    # Continúa solo si la imagen es relevante para construcción
     openai.api_key = settings.AZURE_OPENAI_KEY
     openai.api_base = settings.AZURE_OPENAI_ENDPOINT
     openai.api_type = "azure"
@@ -134,12 +140,18 @@ def process_image(image_url):
             return parsed_response
         except json.JSONDecodeError as e:
             logging.error("Error al parsear JSON: %s", e)
-            return {}
+            # Intentar corregir comas finales
+            corrected_content = re.sub(r',\s*([}\]])', r'\1', response_content)
+            try:
+                parsed_response = json.loads(corrected_content)
+                return parsed_response
+            except json.JSONDecodeError as e:
+                logging.error("Error al parsear JSON después de la corrección: %s", e)
+                return {}
 
     except openai.error.InvalidRequestError as e:
         logging.error("Error en la solicitud a OpenAI: %s", e)
         return {}
-
 def calculate_prices(construction_steps):
     """Calcula precios estimados para los pasos de construcción usando OpenAI."""
     openai.api_key = settings.AZURE_OPENAI_KEY

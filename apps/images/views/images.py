@@ -10,7 +10,7 @@ from ..azure_services import process_image, calculate_prices
 import json
 
 
-class ImageUploadView(CreateView):
+class ImageUploadView(PermissionMixim,CreateView):
     model = ImageUpload
     form_class = ImageUploadForm
     template_name = 'images/upload_image.html'
