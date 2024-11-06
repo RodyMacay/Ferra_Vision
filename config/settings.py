@@ -169,6 +169,8 @@ STORAGES ={
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
     },
 }
+AWS_QUERYSTRING_AUTH = False  # Desactiva los parámetros de autenticación en las URLs
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
 
 
 #AZURE SERVICES

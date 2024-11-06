@@ -17,10 +17,14 @@ class ImageUploadView(PermissionMixim,CreateView):
 
     def form_valid(self, form):
         form.instance.user = self.request.user
-        # Procesar la imagen con Azure y obtener la respuesta como diccionario sin guardarla aún
         self.object = form.save()
-        # Procesar la imagen con Azure y obtener la respuesta como diccionario
-        response = process_image(self.object.image.url)
+    
+        # Utilizar la URL pública
+        image_url = self.object.image.url
+        print("URL de la imagen para Azure:", image_url)
+        
+        # Procesar la imagen con Azure usando la URL completa
+        response = process_image(image_url)
 
         # Verifica si la respuesta es válida y relacionada con construcción
         if "error" in response:
